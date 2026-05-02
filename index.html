@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karga — Treine com propósito</title>
+  <meta name="description" content="Karga é o app de treino que te ajuda a registrar, evoluir e manter o foco na academia." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #FF8A65;
+      --orange-dark: #e8703a;
+      --bg: #121212;
+      --bg2: #1F1F1F;
+      --bg3: #2a2a2a;
+      --text: rgba(255,255,255,0.87);
+      --text-muted: rgba(255,255,255,0.45);
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* N A V */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 5%;
+      background: rgba(18,18,18,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* H E R O */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,138,101,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,138,101,0.12);
+      color: var(--orange);
+      border: 1px solid rgba(255,138,101,0.25);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 8vw, 80px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--orange); }
+
+    .hero p {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 44px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg2);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg3);
+      transform: translateY(-1px);
+    }
+
+    /* M O C K U P */
+    .mockup-section {
+      display: flex;
+      justify-content: center;
+      padding: 20px 5% 80px;
+    }
+
+    .mockup-placeholder {
+      width: 260px;
+      height: 520px;
+      background: var(--bg2);
+      border-radius: 36px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    }
+
+    .mockup-placeholder svg { opacity: 0.3; }
+
+    /* F E A T U R E S */
+    .features {
+      padding: 80px 5%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover { border-color: rgba(255,138,101,0.25); }
+
+    .feature-icon { font-size: 28px; margin-bottom: 16px; }
+
+    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+
+    .feature-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* D O W N L O A D */
+    .download { padding: 80px 5%; text-align: center; }
+
+    .download-box {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 56px 40px;
+    }
+
+    .download-box h2 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .download-box p { color: var(--text-muted); margin-bottom: 36px; font-size: 15px; }
+
+    /* F O O T E R */
+    footer {
+      padding: 32px 5%;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    footer .logo { font-weight: 800; color: var(--orange); }
+    footer p { font-size: 13px; color: var(--text-muted); }
+
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .download-box { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">Karga</span>
+    <ul class="nav-links">
+      <li><a href="#features">Funcionalidades</a></li>
+      <li><a href="#download">Download</a></li>
+      <li><a href="privacy.html">Privacidade</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">Disponível em breve</div>
+    <h1>Treine com<br/><span>propósito.</span></h1>
+    <p>Karga é o app de treino que te ajuda a registrar sua evolução, organizar suas rotinas e manter o foco na academia.</p>
+    <div class="btn-group">
+      <a href="#download" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+      <a href="#download" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.19.96.07l13.2-7.62-2.82-2.82-11.34 10.37zm-1.1-20.1c-.06.2-.08.43-.08.67v19.34c0 .24.02.47.08.67l.04.04 10.83-10.83v-.1L2.12 3.62l-.04.04zM21.4 10.6l-2.87-1.66-3.19 3.19 3.19 3.19 2.89-1.67c.82-.48.82-1.57-.02-2.05zM4.14.18L17.34 7.8 14.52 10.62 3.18.25A1.07 1.07 0 014.14.18z"/></svg>
+        Google Play
+      </a>
+    </div>
+  </section>
+
+  <div class="mockup-section">
+    <div class="mockup-placeholder">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M17 1H7C5.9 1 5 1.9 5 3v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14zm-5 2c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+      <span>Screenshot do app</span>
+    </div>
+  </div>
+
+  <section class="features" id="features">
+    <p class="section-label">Funcionalidades</p>
+    <h2 class="section-title">Tudo que você precisa<br/>para evoluir</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Rotinas personalizadas</h3>
+        <p>Crie e organize suas rotinas de treino do jeito que funciona para você, com exercícios customizados.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Acompanhe sua evolução</h3>
+        <p>Visualize seu progresso com gráficos e heatmaps. Veja os dias que você treinou e mantenha a consistência.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Registro de séries</h3>
+        <p>Registre peso e repetições para cada exercício. Marque séries como concluídas e acompanhe o treino em tempo real.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Biblioteca de exercícios</h3>
+        <p>Acesse centenas de exercícios com demonstração em GIF para executar cada movimento com a técnica correta.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌙</div>
+        <h3>Tema escuro</h3>
+        <p>Interface pensada para a academia. Tema escuro que não cansa os olhos mesmo sob a iluminação intensa da sala de musculação.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">☁️</div>
+        <h3>Sincronização na nuvem</h3>
+        <p>Seus dados estão sempre seguros e sincronizados. Acesse seu histórico de qualquer dispositivo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="download" id="download">
+    <div class="download-box">
+      <h2>Pronto para<br/>começar?</h2>
+      <p>Baixe o Karga gratuitamente e leve seus treinos para outro nível.</p>
+      <div class="btn-group">
+        <a href="#" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="#" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.19.96.07l13.2-7.62-2.82-2.82-11.34 10.37zm-1.1-20.1c-.06.2-.08.43-.08.67v19.34c0 .24.02.47.08.67l.04.04 10.83-10.83v-.1L2.12 3.62l-.04.04zM21.4 10.6l-2.87-1.66-3.19 3.19 3.19 3.19 2.89-1.67c.82-.48.82-1.57-.02-2.05zM4.14.18L17.34 7.8 14.52 10.62 3.18.25A1.07 1.07 0 014.14.18z"/></svg>
+          Google Play
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="logo">Karga</span>
+    <p>© 2026 Karga. Todos os direitos reservados.</p>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Política de Privacidade</a></li>
+      <li><a href="terms.html">Termos de Uso</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
